@@ -12,7 +12,7 @@ console.log("\n\n开始加载接口方法及路径：\n");
 apiList.forEach(item => {
     app[item.method](item.url, item.fn);
     console.log('method：', item.method, '，url：', item.url);
-})
+});
 
 console.log("\n接口方法及路径已全部加载完成\n\n");
 
