@@ -8,7 +8,8 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
-import axios from 'axios'
+// import axios from 'axios'
+import request from '@/utils/request'
 
 export default {
   name: 'HomeView',
@@ -16,7 +17,7 @@ export default {
     HelloWorld
   },
   created() {
-    axios({
+    request({
       method: 'post',
       url: '/api/',
       data: {
