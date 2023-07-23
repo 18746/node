@@ -1,3 +1,4 @@
+const user = require('./user');
 
 let apiDemoList = [
     {
@@ -36,5 +37,6 @@ let apiDemoList = [
 ]
 
 module.exports = [
-    ...apiDemoList
+    ...apiDemoList,
+    ...user,
 ]

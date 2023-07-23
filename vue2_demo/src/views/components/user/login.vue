@@ -43,7 +43,8 @@
 <script>
 //   import HelloWorld from '@/components/HelloWorld.vue'
 //   import axios from 'axios'
-  
+import request from '@/utils/request'
+
 export default {
     name: 'login',
     data() {
@@ -88,8 +89,26 @@ export default {
                 return true;
             }
         },
-        rigisterFun() {
-
+        async rigisterFun() {
+            if (this.rigister.userName && this.rigister.phoneNumber && this.rigister.password && this.rigister.passwordAgain) {
+                if (this.rigister.password == this.rigister.passwordAgain) {
+                    // 调用接口
+                    
+                    await request({
+                        method: 'post',
+                        url: '/api/rigister',
+                        data: this.rigister
+                    }).then((res) => {
+                        console.log(res);
+                    }).catch(err => {
+                        console.log(err);
+                    });
+                } else {
+                    this.$alert('确认密码与密码不同！！！')
+                }
+            } else {
+                this.$alert('请输入')
+            }
         },
         loginFun() {
 

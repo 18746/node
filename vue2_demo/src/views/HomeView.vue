@@ -16,6 +16,13 @@ export default {
   components: {
     HelloWorld
   },
+  data() {
+    return {
+      asd: [],
+      list: [1,2,3],
+      type: 'class',
+    }
+  },
   created() {
     request({
       method: 'post',
