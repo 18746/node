@@ -93,7 +93,7 @@ export default {
             if (this.rigister.userName && this.rigister.phoneNumber && this.rigister.password && this.rigister.passwordAgain) {
                 if (this.rigister.password == this.rigister.passwordAgain) {
                     // 调用接口
-                    
+                    // xxx.regist
                     await request({
                         method: 'post',
                         url: '/api/rigister',
