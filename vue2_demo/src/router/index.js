@@ -8,6 +8,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
+    redirect:'/user/login',
     component: HomeView
   }, {
     path: '/about',
