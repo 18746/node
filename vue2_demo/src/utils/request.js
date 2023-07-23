@@ -2,7 +2,7 @@
 // 导入axios
 import axios from 'axios'
 // 使用element-ui Message做消息提醒
-import { Message} from 'element-ui';
+// import { Message} from 'element-ui';
 
 
 //1. 创建新的axios实例，
@@ -34,9 +34,11 @@ service.interceptors.request.use(config => {
 // 3.响应拦截器
 service.interceptors.response.use(response => {
   //接收到响应数据并成功后的一些共有的处理，关闭loading等
- 
+  console.log(321)
   return response
 }, error => {
+  console.log(3)
+
   /***** 接收到异常响应的处理开始 *****/
   if (error && error.response) {
     // 1.公共错误处理
@@ -85,15 +87,16 @@ service.interceptors.response.use(response => {
   } else {
     // 超时处理
     if (JSON.stringify(error).includes('timeout')) {
-      Message.error('服务器响应超时，请刷新当前页')
+      error.message = '服务器响应超时，请刷新当前页';
     }
     error.message = '连接服务器失败'
   }
  
-  Message.error(error.message)
+  // Message.error(error.message)
+  console.error(error)
   /***** 处理结束 *****/
   //如果不需要错误处理，以上的处理过程都可省略
-  return Promise.resolve(error.response)
+  return Promise.reject(error.response)
 })
 
 //4.导入文件

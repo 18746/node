@@ -19,7 +19,7 @@
                 <input class="password" :type="rigister.passwordAgainType" v-model="rigister.passwordAgain">
                 <button class="pass" @click="changePassWord(rigister, 'passwordAgainType')">s</button>
             </label>
-            <button @click="rigisterFun">注册</button>
+            <button @click="rigisterFun"> 注册</button>
         </div>
         <div v-else class="body">
             <label>
@@ -51,16 +51,16 @@ export default {
         return {
             flag: true,
             rigister: {
-                userName: '',
-                phoneNumber: '',
-                password: '',
+                userName: 'wangxudong',
+                phoneNumber: '18713102810',
+                password: 'dong886',
                 passwordType: 'password',
-                passwordAgain: '',
+                passwordAgain: 'dong886',
                 passwordAgainType: 'password'
             },
             login: {
-                phoneNumber: '',
-                password: '',
+                phoneNumber: '18713102810',
+                password: 'dong886',
                 passwordType: 'password',
             },
         }
@@ -93,15 +93,19 @@ export default {
             if (this.rigister.userName && this.rigister.phoneNumber && this.rigister.password && this.rigister.passwordAgain) {
                 if (this.rigister.password == this.rigister.passwordAgain) {
                     // 调用接口
-                    // xxx.regist
                     await request({
                         method: 'post',
                         url: '/api/rigister',
                         data: this.rigister
                     }).then((res) => {
-                        console.log(res);
+                        console.log(res,'res');
+                        this.$confirm(res.data.messageText+",点击确认进入登录页面").then(_=>{
+                            this.changeFlag();
+                            this.login.password = 'dong886';
+                        }).catch(err=>{})
                     }).catch(err => {
                         console.log(err);
+                      this.$alert(err.data.messageText)
                     });
                 } else {
                     this.$alert('确认密码与密码不同！！！')
@@ -110,8 +114,20 @@ export default {
                 this.$alert('请输入')
             }
         },
-        loginFun() {
-
+      async loginFun() {
+            await request({
+                        method: 'post',
+                        url: '/api/login',
+                        data: {
+                            phoneNumber: this.login.phoneNumber,
+                            password: this.login.password,
+                        }
+                    }).then((res) => {
+                       this.$router.push({path:'/index'})
+                    }).catch(err => {
+                        console.log(err);
+                      this.$alert(err.data.messageText)
+                    });
         }
     }
 }
